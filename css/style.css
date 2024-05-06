@@ -1,0 +1,276 @@
+:root {
+  --primary-color: #fc8d95;
+  --dark-grey: #494949;
+  --light-grey: #bdbdbd;
+  --lighter-grey: #f1f1f1;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--light-grey);
+}
+
+header {
+  background-color: var(--dark-grey);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  padding: 1rem;
+  cursor: pointer;
+  margin: 0 2px 0 2px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-decoration {
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 12px;
+}
+
+.menu-item {
+  padding: 0.5rem;
+  color: white;
+}
+.menu-item:hover {
+  color: var(--primary-color);
+}
+
+.flashMessage {
+  background-color: var(--lighter-grey);
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  padding: 10px;
+  display: none;
+}
+
+.container {
+  height: 85vh;
+  width: 100%;
+  position: relative;
+}
+
+.infoBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 1100px;
+  background-color: var(--dark-grey);
+  color: white;
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+dialog {
+  background-color: white;
+  border-radius: 10px;
+  padding: 0;
+  border: none;
+  font-size: 0.8rem;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow-x: scroll;
+  width: auto;
+}
+@media (min-width: 600px) {
+  dialog {
+    left: -50px;
+  }
+}
+@media (min-width: 800px) {
+  dialog {
+    left: -100px;
+  }
+}
+@media (min-width: 1000px) {
+  dialog {
+    left: -300px;
+  }
+}
+@media (min-width: 1300px) {
+  dialog {
+    left: -450px;
+  }
+}
+@media (min-width: 1600px) {
+  dialog {
+    left: -550px;
+  }
+}
+@media (min-width: 1800px) {
+  dialog {
+    left: -650px;
+  }
+}
+
+.dialog-schuzky-obchodniku, .dialog-vsechny-schuzky {
+  top: -20px;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+@media (min-width: 600px) {
+  .dialog-schuzky-obchodniku, .dialog-vsechny-schuzky {
+    min-width: 550px;
+    max-width: 1700px;
+  }
+}
+@media (min-width: 800px) {
+  .dialog-schuzky-obchodniku, .dialog-vsechny-schuzky {
+    min-width: 700px;
+  }
+}
+@media (min-width: 1500px) {
+  .dialog-schuzky-obchodniku, .dialog-vsechny-schuzky {
+    min-width: 1200px;
+  }
+}
+
+.dialog-vytvorit_schuzku {
+  min-width: 350px;
+  top: -60px;
+}
+
+.dialog-content {
+  flex-direction: column;
+  padding: 20px 10px 20px 10px;
+  align-items: center;
+  align-content: center;
+}
+
+dialog table tbody tr:nth-child(odd) {
+  background-color: var(--lighter-grey);
+  padding-left: 5px;
+}
+
+.close-dialog-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: #f3f3f3;
+  height: 1.5rem;
+  border-radius: 10px 10px 0 0;
+}
+
+.close-dialog-icon {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  cursor: pointer;
+  border: none;
+  color: #8b8a8a;
+  cursor: pointer;
+}
+
+.form-heading-wrapper {
+  width: 100%;
+  padding: 1em 0;
+  background-color: var(--primary-color);
+}
+
+.form-heading {
+  text-align: left;
+  padding-left: 10px;
+  font-weight: 500;
+  margin: 0;
+}
+
+#form-vytvorit_schuzku {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 10px 0px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#form-schuzky-obchodniku {
+  width: auto;
+  max-height: 80vh;
+}
+
+label {
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.submit-btn {
+  width: 100%;
+  grid-column: 1/span 2;
+}
+
+.btn {
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 0.4rem;
+  margin-top: 10px;
+}
+
+.form-btns-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+#ui-id-1 {
+  width: 60vw !important;
+  max-width: 700px !important;
+}
+
+.ui-button {
+  display: none;
+}
+
+table {
+  margin: 10px 0px;
+  width: 100%;
+}
+
+.table-head {
+  background-color: black;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 5px;
+}
+
+th {
+  text-align: left;
+  padding-left: 5px;
+  width: auto;
+}
+
+.error-hlaska {
+  display: none;
+  grid-column: 2;
+  font-size: 10px;
+  line-height: 0;
+  color: var(--primary-color);
+}
+
+.hidden {
+  display: none;
+}
+
+.zmeneny-radek {
+  background-color: rgba(0, 210, 105, 0.3137254902);
+}/*# sourceMappingURL=style.css.map */
