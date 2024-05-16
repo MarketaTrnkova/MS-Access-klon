@@ -99,7 +99,7 @@ $(document).ready(function() {
             return true;
         } else {
             $(".error-hlaska.error-tel").css({"display": "block"});
-            $(".error-hlaska.error-tel").text("Telefonní číslo není ve správném formátu, jeho délka je " + vyslednyString.length);
+            $(".error-hlaska.error-tel").text("Telefonní číslo není ve správném formátu");
             return false;
         }
     }

@@ -68,6 +68,7 @@ nav ul li {
 
 .infoBox {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 80%;
@@ -80,6 +81,26 @@ nav ul li {
   text-align: center;
 }
 
+.stahnoutDatabazi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stahnoutDatabazi a {
+  color: white;
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+
+.link-wrapper {
+  background-color: #f5d3d3;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 5px;
+}
+
 dialog {
   background-color: white;
   border-radius: 10px;
@@ -88,8 +109,8 @@ dialog {
   font-size: 0.8rem;
   font-family: "Montserrat", sans-serif;
   position: relative;
-  overflow-x: scroll;
   width: auto;
+  left: -25px;
 }
 @media (min-width: 600px) {
   dialog {
@@ -125,6 +146,7 @@ dialog {
 .dialog-schuzky-obchodniku, .dialog-vsechny-schuzky {
   top: -20px;
   max-height: 80vh;
+  min-width: 90vw;
   overflow-y: scroll;
 }
 @media (min-width: 600px) {
@@ -154,6 +176,10 @@ dialog {
   padding: 20px 10px 20px 10px;
   align-items: center;
   align-content: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
 }
 
 dialog table tbody tr:nth-child(odd) {
@@ -204,6 +230,18 @@ dialog table tbody tr:nth-child(odd) {
   max-height: 80vh;
 }
 
+#form-vsechny-schuzky {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 600px) {
+  #form-vsechny-schuzky {
+    flex-direction: row;
+    gap: 0px;
+  }
+}
+
 label {
   text-align: left;
   font-size: 0.8rem;
@@ -228,6 +266,10 @@ label {
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
+}
+
+.terminOd {
+  margin-bottom: 10px;
 }
 
 #ui-id-1 {

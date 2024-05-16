@@ -75,7 +75,6 @@
     if(array_key_exists("zobrazit-schuzky-obchodnika", $_GET)){
         $schuzkyObchodniku = $explorer->vypisSchuzkyObchodniku($_GET["schuzky-obchodniku-combobox"]);
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -111,6 +110,7 @@
             </div>
            <div class="infoBox">
             <p>Tato stránka slouží k zobrazení a odeslání formulářů, které jsem původně vytvořila v MS Access a přenesla je do MySQL databáze.  </p>
+            <div class="stahnoutDatabazi"><img src="img/Microsoft-Access-logo-pink.png" width="50px" MS-Access Databáze ke stažení"><div class="link-wrapper"><a href="./organizer-schuzek.accdb" download="organizer-schuzek.accdb">Stáhnout MS Access databázi</a></div></div>
            </div>
             <dialog class="dialog-vytvorit_schuzku">
                 <div class="close-dialog-wrapper"><span class="close-dialog-icon close-vytvorit-schuzku">&#10006;</span></div>
@@ -165,34 +165,35 @@
                         </select>
                         <div class="form-btns-wrapper"><input type="submit" class="btn" name="zobrazit-schuzky-obchodnika" value="Zobrazit schůzky obchodníka"><button type="button" class="btn vytvorit-schuzku_btn">Vytvořit novou schůzku</button></div>
                     </form>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead class="table-head">
+                                <tr class="table-row">
+                                    <th>Jméno <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
+                                    <th>Příjmení <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
+                                    <th>Telefon</th>
+                                    <th>Termín schůzky <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
+                                    <th>Poznámka</th>
+                                    <th>ID_obchodníka</th>
+                                </tr>
+                            </thead <tbody>
+                            <?php foreach($schuzkyObchodniku AS $index => $hodnota): ?>
+                                <tr>
+                                        <td><?= htmlspecialchars($hodnota['jmeno']) ?></td>
+                                        <td><?= htmlspecialchars($hodnota['prijmeni']) ?></td>
+                                        <td><?= htmlspecialchars($hodnota['telefon']) ?></td>
+                                        <td><?= htmlspecialchars($hodnota['termin_schuzky']) ?></td>
+                                        <td><?php if ($hodnota['poznamka'] !== null && $hodnota['poznamka'] !== "") echo htmlspecialchars($hodnota['poznamka']); else echo "-"; ?></td>
+                                        <td> <?php if ($hodnota['id_obchodnika'] !== null && $hodnota['id_obchodnika'] !== "") echo htmlspecialchars($hodnota['id_obchodnika']); else echo "-"; ?>
+                                        </td>
+                                            
+                                        </td>
+                                </tr>
+                            <?php  endforeach; ?> 
+                            </tbody>
 
-                    <table>
-                        <thead class="table-head">
-                            <tr class="table-row">
-                                <th>Jméno <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
-                                <th>Příjmení <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
-                                <th>Telefon</th>
-                                <th>Termín schůzky <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
-                                <th>Poznámka</th>
-                                <th>ID_obchodníka</th>
-                            </tr>
-                        </thead <tbody>
-                        <?php foreach($schuzkyObchodniku AS $index => $hodnota): ?>
-                            <tr>
-                                    <td><?= htmlspecialchars($hodnota['jmeno']) ?></td>
-                                    <td><?= htmlspecialchars($hodnota['prijmeni']) ?></td>
-                                    <td><?= htmlspecialchars($hodnota['telefon']) ?></td>
-                                    <td><?= htmlspecialchars($hodnota['termin_schuzky']) ?></td>
-                                    <td><?php if ($hodnota['poznamka'] !== null && $hodnota['poznamka'] !== "") echo htmlspecialchars($hodnota['poznamka']); else echo "-"; ?></td>
-                                    <td> <?php if ($hodnota['id_obchodnika'] !== null && $hodnota['id_obchodnika'] !== "") echo htmlspecialchars($hodnota['id_obchodnika']); else echo "-"; ?>
-                                    </td>
-                                        
-                                    </td>
-                            </tr>
-                        <?php  endforeach; ?> 
-                        </tbody>
-
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </dialog>
 
@@ -204,44 +205,49 @@
                 </div>
                 <div class="dialog-content">
                     <form id="form-vsechny-schuzky" action="#" method="GET">
-                        <label for="vsechny-schuzky-terminOd">Termín od</label> <input type="date" name="vsechny-schuzky-terminOd" id="vsechny-schuzky-terminOd" value="<?php if(array_key_exists('vsechnySchuzkyterminOd', $_SESSION)) echo $_SESSION['vsechnySchuzkyterminOd'] ?>">
-                        <label for="vsechny-schuzky-terminDo">Termín do</label> <input type="date" name="vsechny-schuzky-terminDo" id="vsechny-schuzky-terminDo" value="<?php if(array_key_exists('vsechnySchuzkyterminDo', $_SESSION)) echo $_SESSION['vsechnySchuzkyterminDo'] ?>">
-                        <div class="form-btns-wrapper"><input type="submit" name="submit-vypsat-vsechny-schuzky" id="submit-vypsat-vsechny-schuzky"  class="btn" value="Vypsat schůzky"></div>
+                        <div class="terminOd">  <label for="vsechny-schuzky-terminOd">Termín od</label> <input type="date" name="vsechny-schuzky-terminOd" id="vsechny-schuzky-terminOd" value="<?php if(array_key_exists('vsechnySchuzkyterminOd', $_SESSION)) echo $_SESSION['vsechnySchuzkyterminOd'] ?>"></div>
+                      <div class="terminDo"> <label for="vsechny-schuzky-terminDo">Termín do</label> <input type="date" name="vsechny-schuzky-terminDo" id="vsechny-schuzky-terminDo" value="<?php if(array_key_exists('vsechnySchuzkyterminDo', $_SESSION)) echo $_SESSION['vsechnySchuzkyterminDo'] ?>"></div>
+                       
+                    <div class="form-btns-wrapper"><input type="submit" name="submit-vypsat-vsechny-schuzky" id="submit-vypsat-vsechny-schuzky"  class="btn" value="Vypsat schůzky"></div>
                     </form>
-
-                    <table>
-                        <thead class="table-head">
-                            <tr class="table-row">
-                                <th>Jméno <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
-                                <th>Příjmení <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
-                                <th>Telefon</th>
-                                <th>Termín schůzky <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
-                                <th>Poznámka</th>
-                                <th>ID_obchodníka</th>
-                            </tr>
-                        </thead 
-                        <tbody>
-                            <?php foreach($_SESSION["vsechnySchuzky"] AS $index => $hodnota): ?>
-                                <tr> 
-                                    <td <?php if(isset($idZmeneneSchuzky) && $hodnota['id_schuzky'] == $idZmeneneSchuzky) echo "class='zmeneny-radek'"; ?>> <?= htmlspecialchars($hodnota['jmeno']) ?></td>
-                                    <td <?php if(isset($idZmeneneSchuzky) && $hodnota['id_schuzky'] == $idZmeneneSchuzky) echo "class='zmeneny-radek'"; ?>> <?= htmlspecialchars($hodnota['prijmeni']) ?></td>
-                                    <td <?php if(isset($idZmeneneSchuzky) && $hodnota['id_schuzky'] == $idZmeneneSchuzky) echo "class='zmeneny-radek'"; ?>> <?= htmlspecialchars($hodnota['telefon']) ?></td>
-                                    <td <?php if(isset($idZmeneneSchuzky) && $hodnota['id_schuzky'] == $idZmeneneSchuzky) echo "class='zmeneny-radek'"; ?>> <?= htmlspecialchars($hodnota['termin_schuzky'])?></td>
-                                    <td <?php if(isset($idZmeneneSchuzky) && $hodnota['id_schuzky'] == $idZmeneneSchuzky) echo "class='zmeneny-radek'"; ?>> <?php if ($hodnota['poznamka'] !== null && $hodnota['poznamka'] !== "") echo htmlspecialchars($hodnota['poznamka']); else echo "-"; ?></td>
-                                    <td><select name="schuzky-obchodniku-id" class="schuzky-obchodniku-id">
-                                            <option value=""><?php echo(htmlspecialchars($hodnota['id_obchodnika'])); ?></option>
-                                            <option value="1">1 - Marek Pospíšil</option>
-                                            <option value="2">2 - Alice Novotná</option>
-                                            <option value="3">3 - Martin Novák</option>
-                                            <option value="4">4 - Jiří Smetana</option>
-                                    </select>
-                                    <input type="hidden" class="hidden" name="id_schuzky" value="<?= $hodnota['id_schuzky'] ?>" />
-                                    </td>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead class="table-head">
+                                <tr class="table-row">
+                                    <th>Jméno <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
+                                    <th>Příjmení <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
+                                    <th>Telefon</th>
+                                    <th>Termín schůzky <img src="./img/filtr.png" width="20px" title="Filtr zatím funguje jen v MS Access" alt="filtr dat"></th>
+                                    <th>Poznámka</th>
+                                    <th>ID_obchodníka</th>
                                 </tr>
-                            <?php  endforeach; ?> 
-                        </tbody>
+                            </thead 
+                            <tbody>
+                                
+                                <?php if(!array_key_exists("vsechnySchuzky", $_SESSION))$_SESSION["vsechnySchuzky"] = $explorer->vypisVsechnySchuzky(); foreach($_SESSION["vsechnySchuzky"] AS $index => $hodnota): ?>
+                                    <tr> 
+                                        <?php $zmenenyRadek = isset($idZmeneneSchuzky) && $hodnota['id_schuzky'] == $idZmeneneSchuzky ? "class='zmeneny-radek'" : "";?>
+                                  
+                                        <td <?= $zmenenyRadek ?>> <?= htmlspecialchars($hodnota['jmeno']) ?></td>
+                                        <td <?= $zmenenyRadek ?>> <?= htmlspecialchars($hodnota['prijmeni']) ?></td>
+                                        <td <?= $zmenenyRadek ?>> <?= htmlspecialchars($hodnota['telefon']) ?></td>
+                                        <td <?= $zmenenyRadek ?>> <?= htmlspecialchars($hodnota['termin_schuzky'])?></td>
+                                        <td <?= $zmenenyRadek ?>> <?php if ($hodnota['poznamka'] !== null && $hodnota['poznamka'] !== "") echo htmlspecialchars($hodnota['poznamka']); else echo "-"; ?></td>
+                                        <td><select name="schuzky-obchodniku-id" class="schuzky-obchodniku-id">
+                                                <option value=""><?php echo(htmlspecialchars($hodnota['id_obchodnika'])); ?></option>
+                                                <option value="1">1 - Marek Pospíšil</option>
+                                                <option value="2">2 - Alice Novotná</option>
+                                                <option value="3">3 - Martin Novák</option>
+                                                <option value="4">4 - Jiří Smetana</option>
+                                        </select>
+                                        <input type="hidden" class="hidden" name="id_schuzky" value="<?= $hodnota['id_schuzky'] ?>" />
+                                        </td>
+                                    </tr>
+                                <?php  endforeach; ?> 
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
                 <div class="hidden">
                     <form action="#" method="post">
